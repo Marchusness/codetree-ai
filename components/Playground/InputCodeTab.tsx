@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Tabs, { TabPane } from "rc-tabs";
 import { Monaco } from "./Monaco";
 import { EditorValueInterface } from "../../_types/editorTypes";
 
-const InputCode = ({ editorValue }: { editorValue: EditorValueInterface }) => {
+const InputCode = ({ editorValue: parentEditorValue }: { editorValue: EditorValueInterface }) => {
+  const [editorValue, setEditorValue] = useState(parentEditorValue);
+  
+  // Update local state when parent state updates
+  useEffect(() => {
+    setEditorValue(parentEditorValue);
+  }, [parentEditorValue]);
+
   const dataToMap = Object.entries(editorValue.tabs);
 
   const tabPane = dataToMap.map((item, key) => (

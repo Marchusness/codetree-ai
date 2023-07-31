@@ -1,11 +1,12 @@
 import React, { useMemo, useRef, useEffect, useState, ChangeEvent, FormEvent } from "react";
-import { useChat } from "ai/react";
+import { useChat, Message } from "ai/react";
+import { FunctionCallHandler, nanoid } from "ai";
 import { useAppDispatch, useAppSelector } from "../../store/hook";
 import {
   compiler_state,
   initEsbuild,
 } from "../../store/features/compilerSlice";
-import { editor_state, set_monaco_input_value } from "../../store/features/editorSlice";
+import { editor_state, set_editor_value, set_monaco_input_value } from "../../store/features/editorSlice";
 import { theme_state } from "../../store/features/themeSlice";
 import { ModalEnum, open_modal } from "../../store/features/modalSlice";
 
@@ -76,31 +77,6 @@ const Playground = () => {
       dispatch(set_monaco_input_value(newEditorValue as any));
     }
   }, [markdownCode, dispatch]);
-    // Memoize markdown messages
-  const parsedMessages = useMemo(() => messages.map((message, index) => {
-    return (
-      <p key={index}>
-        <ReactMarkdown
-          className="prose mt-1 w-full break-words prose-p:leading-relaxed" 
-          components={{
-            a: (props) => (
-              <a {...props} target="_blank" rel="noopener noreferrer" />
-            ),
-            // @ts-ignore
-            code: ({node, ...props}) => {
-              const codeValue = props.children[0] || '';
-              if (codeValue !== markdownCode) {
-                setMarkdownCode(codeValue as any);
-              }
-              return null;
-            }
-          }}
-        >
-          {message.content}
-        </ReactMarkdown>
-      </p>
-    );
-  }), [messages, markdownCode]);
 
   return (
     <div style={{ background: theme.background }}>
@@ -112,7 +88,7 @@ const Playground = () => {
               className="relative w-full"
             >
             <textarea ref={inputRef} onChange={(e) => setInput(e.target.value)}
-              placeholder="Chat with GPT-4 and code blocks will automatically render in the editor! Codetree uses web assembly and esbuild to compile in the browser."
+              placeholder="Chat with GPT-4 and code blocks will automatically render in the editor! Codetree uses WebAssembly and Esbuild to compile in the browser."
               onKeyDown={(e) => {
                 if (e.key === "Enter" && !e.shiftKey) {
                   formRef.current?.requestSubmit();
