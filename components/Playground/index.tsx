@@ -122,7 +122,7 @@ const Playground = () => {
               className="relative w-full"
             >
             <textarea ref={inputRef} onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask GPT-4 to write some code"
+              placeholder="Chat with GPT-4 and code blocks will automatically render in the editor! Codetree uses web assembly and esbuild to compile in the browser."
               onKeyDown={(e) => {
                 if (e.key === "Enter" && !e.shiftKey) {
                   formRef.current?.requestSubmit();
@@ -140,7 +140,7 @@ const Playground = () => {
             </button>
           </form>
         </div>
-        <div className="flex flex-col items-start space-y-4 overflow-y-auto max-h-[50vh]">
+        <div className="flex flex-col items-start space-y-4 overflow-y-auto max-h-[20vh]">
           {messages?.map((message, index) => (
             <p key={index} className="messages-text">
               <ReactMarkdown
