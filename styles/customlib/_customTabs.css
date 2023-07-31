@@ -1,3 +1,25 @@
+.textarea {
+  width: 100%;
+  min-height: 150px;
+  padding: 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .25rem;
+  background-color: #171E25;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  resize: none;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.textarea:focus {
+  border-color: #9ca3af;
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, .5);
+}
+
+
 /* editor input ====================================*/
 .editor-input-tabs {
   @apply flex h-full;

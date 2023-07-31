@@ -25,7 +25,7 @@ const IframePanel = ({
   const iframe = useRef<any>();
   const dispatch = useAppDispatch();
 
-  const htmlFrameContent = createIframeContent(tabs.css.data, tabs.html.data);
+  const htmlFrameContent = createIframeContent(tabs.css?.data, tabs.html?.data);
 
   //=== incoming message
   useEffect(() => {

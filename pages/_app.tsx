@@ -49,22 +49,6 @@ function MyApp({ Component, pageProps, router, initialUser }: MyAppProps) {
 
   return (
     <>
-      <Script
-        strategy="lazyOnload"
-        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
-      />
-
-      <Script strategy="lazyOnload">
-        {`
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('js', new Date());
-                    gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
-                    page_path: window.location.pathname,
-                    });
-                `}
-      </Script>
-      
       <ApolloProvider client={createApolloClient()}>
         <Provider store={store}>
           <Component {...pageProps} />
@@ -80,18 +64,24 @@ export default MyApp;
 MyApp.getInitialProps = async (appContext: AppContext) => {
   const appProps = await App.getInitialProps(appContext);
 
-  if (appContext.ctx.req && appContext.ctx.res) {
-    const session = await getIronSession(
-      appContext.ctx.req,
-      appContext.ctx.res,
-      sessionOptions
-    );
-
-    return {
-      ...appProps,
-      initialUser: session.user,
-    };
+  /*
+  try {
+    if (appContext.ctx.req && appContext.ctx.res) {
+      const session = await getIronSession(
+        appContext.ctx.req,
+        appContext.ctx.res,
+        sessionOptions
+      );
+  
+      return {
+        ...appProps,
+        initialUser: session.user,
+      };
+    }
+  } catch (err) {
+    console.warn(err);
   }
+  */
 
   return appProps;
 };

@@ -28,7 +28,7 @@ export const Monaco = ({ monacoLanguage, tab }: MonacoType) => {
       options={options}
       className="h-full"
       // @ts-ignore
-      value={monacoInputValue.tabs[tab].data}
+      value={monacoInputValue.tabs[tab]?.data || ''}
     />
   );
 };

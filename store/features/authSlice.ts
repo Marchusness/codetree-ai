@@ -104,6 +104,7 @@ export function withOauth(input: OauthInput, provider: OauthProvider) {
       dispatch(with_oauth_failure(res.data.message));
       return res.data;
     } catch (err) {
+      // @ts-ignore
       dispatch(with_oauth_failure(err.message));
     }
   };
@@ -118,6 +119,7 @@ export function logout() {
         dispatch(logout_user_success());
       });
     } catch (err) {
+      // @ts-ignore
       dispatch(logout_user_failure(err.message));
     }
   };

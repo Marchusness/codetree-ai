@@ -6,19 +6,19 @@ export const treeTemplates = {
     iconSrc: "/icons/vanilla.svg",
     tabs: {
       javascript: {
-        title: "Js/Jsx",
+        title: "app.jsx",
         entryPoints: "index.js",
         monacoLanguage: "javascript",
         data: ``,
       },
       html: {
-        title: "Html",
+        title: "index.html",
         entryPoints: "index.html",
         monacoLanguage: "html",
         data: ``,
       },
       css: {
-        title: "Css",
+        title: "main.css",
         entryPoints: "main.css",
         monacoLanguage: "css",
         data: ``,
@@ -32,7 +32,7 @@ export const treeTemplates = {
     iconSrc: "/icons/vanilla.svg",
     tabs: {
       javascript: {
-        title: "Js/Jsx",
+        title: "JS/JSX",
         entryPoints: "index.js",
         monacoLanguage: "javascript",
         data: `document.getElementById("app").innerHTML = \`
@@ -44,7 +44,7 @@ export const treeTemplates = {
 `,
       },
       html: {
-        title: "Html",
+        title: "html",
         entryPoints: "index.html",
         monacoLanguage: "html",
         data: `<div id="app"></div>`,
@@ -120,7 +120,7 @@ console.log(result)`,
     iconSrc: "/icons/p5-dot-js.svg",
     tabs: {
       javascript: {
-        title: "Js/Jsx",
+        title: "JS/JSX",
         entryPoints: "index.js",
         monacoLanguage: "javascript",
         data: `import p5 from "p5";
@@ -168,7 +168,7 @@ canvas {
     iconSrc: "/icons/reactjs.svg",
     tabs: {
       javascript: {
-        title: "Js/Jsx",
+        title: "JS/JSX",
         entryPoints: "index.js",
         monacoLanguage: "javascript",
         data: `import React, { useState } from "react";
@@ -193,13 +193,13 @@ ReactDOM.render(<App />, rootElement);
 `,
       },
       html: {
-        title: "Html",
+        title: "index.html",
         entryPoints: "index.html",
         monacoLanguage: "html",
         data: ``,
       },
       css: {
-        title: "Css",
+        title: "main.css",
         entryPoints: "main.css",
         monacoLanguage: "css",
         data: `.App {
@@ -217,7 +217,7 @@ ReactDOM.render(<App />, rootElement);
     iconSrc: "/icons/gsap-greensock.svg",
     tabs: {
       javascript: {
-        title: "Js/Jsx",
+        title: "JS/JSX",
         entryPoints: "index.js",
         monacoLanguage: "javascript",
         data: `import gsap from "gsap"

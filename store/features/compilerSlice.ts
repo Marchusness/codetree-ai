@@ -100,6 +100,7 @@ export function getCompileCode(rawCode: string, entryPoint: string) {
 
       dispatch(compiled_success(result.outputFiles[0].text));
     } catch (error) {
+      // @ts-ignore
       dispatch(compiled_failure(error.message));
     }
   };
