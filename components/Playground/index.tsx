@@ -1,12 +1,11 @@
 import React, { useMemo, useRef, useEffect, useState, ChangeEvent, FormEvent } from "react";
-import { useChat, Message } from "ai/react";
-import { FunctionCallHandler, nanoid } from "ai";
+import { useChat } from "ai/react";
 import { useAppDispatch, useAppSelector } from "../../store/hook";
 import {
   compiler_state,
   initEsbuild,
 } from "../../store/features/compilerSlice";
-import { editor_state, set_editor_value, set_monaco_input_value } from "../../store/features/editorSlice";
+import { editor_state, set_monaco_input_value } from "../../store/features/editorSlice";
 import { theme_state } from "../../store/features/themeSlice";
 import { ModalEnum, open_modal } from "../../store/features/modalSlice";
 
@@ -14,7 +13,6 @@ import ConsoleLog from "./ConsoleLog";
 import Iframe from "./Iframe";
 import InputCodeTab from "./InputCodeTab";
 import Footer from "./Footer";
-import Header from "./Header";
 import Pane from "./Pane";
 import { SendIcon } from "../../constants/icon";
 import ReactMarkdown from "react-markdown";
@@ -32,14 +30,6 @@ const Playground = () => {
       console.error(error);
     },
   });
-
-  const messagesEndRef = useRef<null | HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  }, [messages]);
 
   useEffect(() => {
     if (!esbuildStatus.isReady) {
@@ -162,7 +152,6 @@ const Playground = () => {
               </ReactMarkdown>
             </p>
           ))}
-          <div ref={messagesEndRef} />
         </div>
       </div>
       <Pane
