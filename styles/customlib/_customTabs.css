@@ -5,7 +5,7 @@
   font-size: 1rem;
   line-height: 1.5;
   border-radius: .25rem;
-  background-color: #171E25;
+  background-color: #1B252D;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -19,6 +19,9 @@
   box-shadow: 0 0 0 3px rgba(96, 165, 250, .5);
 }
 
+.messages-text {
+  padding: 20px;
+}
 
 /* editor input ====================================*/
 .editor-input-tabs {

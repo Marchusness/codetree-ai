@@ -18,8 +18,6 @@ import Header from "./Header";
 import Pane from "./Pane";
 import { SendIcon } from "../../constants/icon";
 import ReactMarkdown from "react-markdown";
-import { useTree } from "../../hooks";
-
 
 const Playground = () => {
   const dispatch = useAppDispatch();
@@ -124,6 +122,7 @@ const Playground = () => {
               className="relative w-full"
             >
             <textarea ref={inputRef} onChange={(e) => setInput(e.target.value)}
+              placeholder="Ask GPT-4 to write some code"
               onKeyDown={(e) => {
                 if (e.key === "Enter" && !e.shiftKey) {
                   formRef.current?.requestSubmit();
@@ -143,7 +142,7 @@ const Playground = () => {
         </div>
         <div className="flex flex-col items-start space-y-4 overflow-y-auto max-h-[50vh]">
           {messages?.map((message, index) => (
-            <p key={index}>
+            <p key={index} className="messages-text">
               <ReactMarkdown
                 className="prose mt-1 w-full break-words prose-p:leading-relaxed" 
                 components={{
