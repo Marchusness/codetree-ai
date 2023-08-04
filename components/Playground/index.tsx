@@ -6,7 +6,7 @@ import {
   compiler_state,
   initEsbuild,
 } from "../../store/features/compilerSlice";
-import { editor_state, set_editor_value, set_monaco_input_value } from "../../store/features/editorSlice";
+import { editor_state, set_monaco_input_value, update_editor_code } from "../../store/features/editorSlice";
 import { theme_state } from "../../store/features/themeSlice";
 import { ModalEnum, open_modal } from "../../store/features/modalSlice";
 
@@ -25,6 +25,26 @@ const Playground = () => {
   const { theme } = useAppSelector(theme_state);
   const { esbuildStatus, isCompiling, output } = useAppSelector(compiler_state);
   const { logs, editorValue, isLogTabOpen } = useAppSelector(editor_state);
+  const [markdownCode, setMarkdownCode] = useState('');
+  const [prevMarkdownCode, setPrevMarkdownCode] = useState(markdownCode);
+
+  const isValidCodeBlock = (markdownCode: string) => {
+    return markdownCode && markdownCode.length > 10 && markdownCode.includes('\n');
+  }
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (isValidCodeBlock(markdownCode) && markdownCode !== prevMarkdownCode) {
+        dispatch(update_editor_code({ type: 'javascript', content: markdownCode }));
+        setPrevMarkdownCode(markdownCode);
+      }
+    }, 2000);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, [markdownCode, prevMarkdownCode, dispatch]);
+
 
   const { messages, input, setInput, handleSubmit } = useChat({
     onError: (error) => {
@@ -42,11 +62,8 @@ const Playground = () => {
     dispatch(open_modal(ModalEnum.TEMPLATE));
   }, [dispatch]);
 
-  const [markdownCode, setMarkdownCode] = useState('');
-
-  // useEffect to watch for changes in markdownCode
   useEffect(() => {
-    if(markdownCode && markdownCode.length > 10 && markdownCode.includes('\n')) {
+    if(isValidCodeBlock(markdownCode)) {
       const newEditorValue = {
         name: "React",
         description: "By codetree",
@@ -69,11 +86,11 @@ const Playground = () => {
             title: "main.css",
             entryPoints: "main.css",
             monacoLanguage: "css",
-            data: ".App {\n  font-family: sans-serif;\n  text-align: center;\n}\n"
+            data: ""
           }
         }
       };
-  
+      
       dispatch(set_monaco_input_value(newEditorValue as any));
     }
   }, [markdownCode, dispatch]);
