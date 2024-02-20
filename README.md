@@ -24,3 +24,6 @@ No need to install any npm package manually, codetree automatically detects the 
 - Auto-completion and intelliSense.
 
 - Offline mode.
+
+## Future Todo
+- Implement [AI Pay](https://www.joinaipay.com) to help pay for the AI usage costs. (AI Pay is a tool that enables websites to **implement AI for FREE** and easily pass on AI costs to the users of the website)
